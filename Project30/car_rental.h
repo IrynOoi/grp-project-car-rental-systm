@@ -1,3 +1,4 @@
+//car rental.h
 #ifndef CAR_RENTAL_H
 #define CAR_RENTAL_H
 
@@ -5,37 +6,54 @@
 #include <string>
 using namespace std;
 
-class Car {
+// Forward declaration of CManager
+class CManager;
+
+class Car
+{
 private:
     string code;
+    string price;
     string description;
     bool available;
     Car* next;
 
 public:
     Car();
-    Car(string c, string d, bool a);
+    Car(Car* n, string c, string d, string p, bool a);
+
+    // Getter methods
     string getCode();
     string getDescription();
+    string getPrice();
     bool isAvailable();
     Car* getNext();
+
+    // Setter method
     void setNext(Car* n);
-    void addCar(Car** headPtr, string c, string d, bool a);
-    Car* sentinelSearch(string targetModel);
-    void displayCars();
+    Car* sentinelSearch(string targetCategory, CManager* cm);
+    void addCar(Car** headPtr, string c, string d, string p, bool a);
+    void displayCars(Car* head);
+    // Declare  friend class
+    friend class CManager;
+    friend class CarBinarySearch;
+
 };
 
-class CManager {
+class CManager
+{
 private:
     Car* headM;
     Car* headE1;
     Car* headE2;
+    friend class CarSorting; // Allow CarSorting to access private members
 
 public:
-    CManager();
+    CManager(); // Constructor declaration without a return type
     Car** getHead(string type);
     Car* getHeadPtr(string type);
 };
+
 
 class CarSorting {
 public:
@@ -44,7 +62,7 @@ public:
 
 class Rent {
 public:
-    void data();
+    void data(CManager* cm, Car* head, const string& type);
 };
 
 class CarBinarySearch {
@@ -56,3 +74,7 @@ private:
 };
 
 #endif
+
+
+
+
