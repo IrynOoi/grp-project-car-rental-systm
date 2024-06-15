@@ -1,0 +1,66 @@
+
+                       Car Rental - Customer Invoice                  
+  ***********************************************************************
+  | Invoice No. :------------------| #Cnb81353 |
+  | Customer Name:-----------------|  iryn ooi |
+  |1 Vehicle Type:--------------------|Motorcycle Scooter |
+  | Car Model :--------------------|         M |
+  | Number of days :---------------|        21 |
+  | Your Rental Amount is :--------|      1365 |
+  | Caution Money :----------------|         0 |
+  | Advanced :---------------------|         0 |
+   ________________________________________________________
+
+  | Total Rental Amount is :-------|      1365 |
+   ________________________________________________________
+   # This is a computer generated invoice and it does not
+   require an authorised signature #
+ 
+ ***********************************************************************
+  You are advised to pay up the amount before due date.
+  Otherwise penalty fee will be applied
+ ***********************************************************************
+
+                       Car Rental - Customer Invoice                  
+  ***********************************************************************
+  | Invoice No. :------------------| #Cnb81353 |
+  | Customer Name:-----------------|      nanf |
+  |1 Vehicle Type:--------------------|Motorcycle Scooter |
+  | Car Model :--------------------|         M |
+  | Number of days :---------------|        21 |
+  | Your Rental Amount is :--------|      1365 |
+  | Caution Money :----------------|         0 |
+  | Advanced :---------------------|         0 |
+   ________________________________________________________
+
+  | Total Rental Amount is :-------|      1365 |
+   ________________________________________________________
+   # This is a computer generated invoice and it does not
+   require an authorised signature #
+ 
+ ***********************************************************************
+  You are advised to pay up the amount before due date.
+  Otherwise penalty fee will be applied
+ ***********************************************************************
+
+                       Car Rental - Customer Invoice                  
+  ***********************************************************************
+  | Invoice No. :------------------| #Cnb81353 |
+  | Customer Name:-----------------|      irun |
+  |1 Vehicle Type:--------------------|Motorcycle Scooter |
+  | Car Model :--------------------|         M |
+  | Number of days :---------------|         0 |
+  | Your Rental Amount is :--------|         0 |
+  | Caution Money :----------------|         0 |
+  | Advanced :---------------------|         0 |
+   ________________________________________________________
+
+  | Total Rental Amount is :-------|         0 |
+   ________________________________________________________
+   # This is a computer generated invoice and it does not
+   require an authorised signature #
+ 
+ ***********************************************************************
+  You are advised to pay up the amount before due date.
+  Otherwise penalty fee will be applied
+ ***********************************************************************

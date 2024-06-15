@@ -64,7 +64,8 @@ class Rent
 {
 public:
     void data(CManager* cm, Car* head, const string& type);
-    void calculate(string input2, double& total, int day, int hour, int halfday);
+    void calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee);
+    void showrent(string customername, string cartype, int day, double rentalfee, CManager* cm, int order, double total);
 };
 class CarBinarySearch 
 {

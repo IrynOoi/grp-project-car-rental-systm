@@ -8,15 +8,17 @@ using namespace std;
 int main()
 {
     int day=0, halfday=0,hour=0;
-    double total = 0;
+    double total = 0,rentalfee=0.0;
     string cartype, input2;
     char carmodel, input3 = 'a';
+    string customername;
     CManager cm;
     Car car;
     CarSorting sort;
+    int order=0;
 
     // Add cars to the respective lists
-    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65", true); //(MA)Motorcycle Scooter - 1 day
+    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",true); //(MA)Motorcycle Scooter - 1 day
     car.addCar(cm.getHead("M"), "MB", "Halfday", "RM35", true);//(MB)Motorcycle Scooter - halfday
     car.addCar(cm.getHead("M"), "MC", "1 hour", "RM5.00", true);//(MC)Motorcycle Scooter-1 hour
     //1 day
@@ -40,6 +42,10 @@ int main()
 
     do
     {
+        order++; //updating for order as it will be used in the showrent function
+        cout << "\tPlease Enter your Name: ";
+        getline(cin, customername);
+        cout << endl;
         do
         {
             cout << "\nEnter the car type you want to search (M, E1, E2): ";
@@ -73,8 +79,20 @@ int main()
 
         if (result2)
         {
-            cout << "Car model " << input2 << " is found!" << endl;
+            if (!result2->isAvailable()) {
+                cout << "Car model " << input2 << " is not available." << endl;
 
+                cout << "Do you want to add more cars to your cart? (Y/N): ";
+                cin >> input3;
+                cout << endl;
+                if (input3 != 'Y' && input3 != 'y') {
+                    break; // Exit the loop if the user does not want to add more cars
+                }
+                else {
+                    continue; // Skip to the next iteration of the loop
+                }
+            }
+            cout << "Car model " << input2 << " is found!" << endl;
             if (cartype == "E1" || cartype == "E2")
             {
                 do {
@@ -147,7 +165,8 @@ int main()
         cout << "Do you want to add more cars to your cart? (Y/N): ";
         cin >> input3;
         cout << endl;
-        rent.calculate(input2, total, day, hour, halfday);
+        rent.calculate(input2, total, day, hour, halfday,rentalfee);
+        
     } while (input3 == 'Y' || input3 == 'y');
    
    

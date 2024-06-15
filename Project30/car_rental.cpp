@@ -3,6 +3,7 @@
 #include <iostream>
 #include <thread>
 #include <iomanip> 
+#include <fstream>
 using namespace std;
 
 // Car class methods
@@ -234,6 +235,9 @@ void CarSorting::insertionSort(Car** head)
 // Rent class methods
 void Rent::data(CManager* cm, Car* head, const string& type)
 {
+
+
+
     if (head == nullptr) {
         cout << "No cars available." << endl;
         return;
@@ -329,9 +333,8 @@ Car* CarBinarySearch::binarySearchLinkedList(Car* head,string& targetCategory)
     return nullptr;
 }
 
-void Rent:: calculate(string input2, double& total, int day, int hour, int halfday)
+void Rent:: calculate(string input2, double& total, int day, int hour, int halfday,double& rentalfee)
 {
-    double rentalfee=0.0;
     this_thread::sleep_for(std::chrono::seconds(1));
     system("CLS");
     cout << "Calculating rent. Please wait......" << endl;
@@ -355,6 +358,9 @@ void Rent:: calculate(string input2, double& total, int day, int hour, int halfd
         rentalfee = hour * 5;
     else{}
     total += rentalfee;
+    cout << "Your rental fee is RM " << fixed << setprecision(2) << total << endl;
+
 }
+
 
 
