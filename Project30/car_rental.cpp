@@ -1,108 +1,130 @@
 ﻿//car rental.cpp
 #include "car_rental.h"
 #include <iostream>
+#include <thread>
+#include <iomanip> 
 using namespace std;
 
 // Car class methods
+// Constructor for initializing a Car object with parameters
 Car::Car(Car* n, string c, string d, string p, bool a)
 {
-    code = c;
-    description = d;
-    price = p;
-    available = a;
-    next = nullptr;
+    code = c;           // Initialize car code
+    description = d;    // Initialize description
+    price = p;          // Initialize price
+    available = a;      // Initialize availability
+    next = nullptr;     // Initialize next pointer
 }
 
+// Default constructor for Car class
 Car::Car()
 {
-    next = nullptr;
+    next = nullptr;     // Initialize next pointer to nullptr
 }
+
+// Getter for retrieving price of a car
 string Car::getPrice()
 {
-    return price;
+    return price;       // Return price of the car
 }
+
+// Getter for retrieving code of a car
 string Car::getCode()
 {
-    return code;
+    return code;        // Return code of the car
 }
+
+// Getter for retrieving description of a car
 string Car::getDescription()
 {
-    return description;
+    return description; // Return description of the car
 }
 
+// Getter for checking availability of a car
 bool Car::isAvailable()
 {
-    return available;
+    return available;   // Return availability status of the car
 }
 
+// Getter for retrieving the next car in the list
 Car* Car::getNext()
 {
-    return next;
+    return next;        // Return pointer to the next car in the list
 }
 
+// Setter for setting the next car in the list
 void Car::setNext(Car* n)
 {
-    next = n;
+    next = n;           // Set next pointer to point to another car
 }
 
+// Method to add a new car to the end of the linked list
 void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
 {
-    Car* newCar = new Car(nullptr, c, d, p, a);  // Corrected constructor call
+    Car* newCar = new Car(nullptr, c, d, p, a);  // Create a new car object
+
     if (*headPtr == nullptr)
     {
-        *headPtr = newCar;
+        *headPtr = newCar;  // If list is empty, make new car the head
     }
     else
     {
         Car* temp = *headPtr;
         while (temp->getNext() != nullptr)
         {
-            temp = temp->getNext();
+            temp = temp->getNext(); // Traverse to the end of the list
         }
-        temp->setNext(newCar);
+        temp->setNext(newCar); // Append new car to the end of the list
     }
 }
+
+// Method to search for a specific category of cars using sentinel node technique
 Car* Car::sentinelSearch(string targetCategory, CManager* cm)
 {
+    // Check if the target category is valid (must be "M", "E1", or "E2")
     if (targetCategory != "M" && targetCategory != "E1" && targetCategory != "E2")
     {
         cout << "Invalid input" << endl;
-        return nullptr;
+        return nullptr; // Return nullptr if category is invalid
     }
 
-    // Create a sentinel with a category-specific code and all other arguments set to default values
+    // Create a sentinel with a category-specific code and default values
     Car* sentinel = new Car(nullptr, targetCategory + "X", "", "", false);
 
+    // Retrieve the head pointer of the specified category from the Car Manager
     Car* temp = cm->getHeadPtr(targetCategory);
 
+    // Check if the head pointer is nullptr (no cars of this category)
     if (temp == nullptr)
     {
         cout << "Car type " << targetCategory << " not found." << endl;
-        delete sentinel;
-        return nullptr;
+        delete sentinel; // Delete the sentinel node
+        return nullptr;  // Return nullptr if no cars found
     }
 
-    // Traverse until the end of the list to find the last node
+    // Traverse the list until the end to find the last node
     while (temp->getNext() != nullptr)
     {
         temp = temp->getNext();
     }
 
-    // Set the next of the last node to the sentinel
+    // Set the next of the last node to point to the sentinel node
     temp->setNext(sentinel);
 
-    // Reset temp to the head of the list
+    // Reset temp to the head of the list to start searching for the category
     temp = cm->getHeadPtr(targetCategory);
 
     // Traverse the list until finding a node with the target category code
-    while (!(temp->getCode().substr(0, 1) == targetCategory || temp->getCode().substr(0, 2) == targetCategory)) {
-        temp = temp->getNext();
+    while (!(temp->getCode().substr(0, 1) == targetCategory || temp->getCode().substr(0, 2) == targetCategory))
+    {
+        temp = temp->getNext(); // Move to the next car node
     }
 
     Car* found = nullptr;
+    // Check if the found node is not the sentinel (valid car found)
     if (temp != sentinel)
     {
-        found = temp;
+        found = temp; // Assign found car node
         cout << "Category " << targetCategory << " found!" << endl;
     }
     else
@@ -110,18 +132,20 @@ Car* Car::sentinelSearch(string targetCategory, CManager* cm)
         cout << "Category " << targetCategory << " not found." << endl;
     }
 
-    // Reset the next of the last node to nullptr
+    // Reset the next of the last node to nullptr to detach the sentinel
     Car* last = cm->getHeadPtr(targetCategory);
-    while (last->getNext() != sentinel) {
+    while (last->getNext() != sentinel)
+    {
         last = last->getNext();
     }
     last->setNext(nullptr);
 
-    // Delete the sentinel node
+    // Delete the sentinel node after searching is complete
     delete sentinel;
 
-    return found;
+    return found; // Return the found car node or nullptr
 }
+
 
 
 
@@ -177,7 +201,8 @@ Car* CManager::getHeadPtr(string type)
 }
 
 // CarSorting class methods
-void CarSorting::insertionSort(Car** head) {
+void CarSorting::insertionSort(Car** head)
+{
     if (*head == nullptr) return;
 
     Car* sorted = nullptr;
@@ -262,7 +287,8 @@ Car* CarBinarySearch::getNodeAt(Car* head, int index) {
     return nullptr;
 }
 // CarBinarySearch class methods
-Car* CarBinarySearch::binarySearchLinkedList(Car* head, const string& targetCategory) {
+Car* CarBinarySearch::binarySearchLinkedList(Car* head,string& targetCategory)
+{
     int n = countNodes(head);
     int low = 0;
     int high = n - 1;
@@ -301,6 +327,34 @@ Car* CarBinarySearch::binarySearchLinkedList(Car* head, const string& targetCate
     }
 
     return nullptr;
+}
+
+void Rent:: calculate(string input2, double& total, int day, int hour, int halfday)
+{
+    double rentalfee=0.0;
+    this_thread::sleep_for(std::chrono::seconds(1));
+    system("CLS");
+    cout << "Calculating rent. Please wait......" << endl;
+    this_thread::sleep_for(std::chrono::seconds(2));
+    //DAY CALCULATION
+    if (input2 == "MA")
+        rentalfee = day *65;
+    else if (input2 == "E1A")
+        rentalfee = day * 130;
+    else if (input2 == "E1B")
+        rentalfee = day * 250;
+    //HALDAY CALCULATION
+    else if (input2 == "MB")
+        rentalfee = halfday * 35;
+    else if (input2 == "E2A")
+        rentalfee = halfday * 90;
+    else if (input2 == "E2B")
+        rentalfee = halfday * 190;
+    //HOUR CALCULATION
+    else if (input2 == "MC")
+        rentalfee = hour * 5;
+    else{}
+    total += rentalfee;
 }
 
 

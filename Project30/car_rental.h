@@ -60,18 +60,22 @@ public:
     void insertionSort(Car** head);
 };
 
-class Rent {
+class Rent
+{
 public:
     void data(CManager* cm, Car* head, const string& type);
+    void calculate(string input2, double& total, int day, int hour, int halfday);
 };
-
-class CarBinarySearch {
+class CarBinarySearch 
+{
 public:
-    Car* binarySearchLinkedList(Car* head, const string& targetModel);
+    Car* binarySearchLinkedList(Car* head,string& targetModel);
 private:
     int countNodes(Car* head);
     Car* getNodeAt(Car* head, int position);
 };
+
+
 
 #endif
 
