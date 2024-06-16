@@ -4,8 +4,26 @@
 #include <thread>
 #include <iomanip> 
 #include <fstream>
+#include <vector>
 using namespace std;
 
+string input2;
+string cartype;
+double rentalfee;
+int day;
+int hour;
+int halfday;
+
+
+bool customer::isValidName(const string& name) 
+{
+    for (char c : name) {
+        if (isdigit(c)) {
+            return false; // Invalid if any character is a digit
+        }
+    }
+    return true; // Valid if no digits found
+}
 // Car class methods
 // Constructor for initializing a Car object with parameters
 Car::Car(Car* n, string c, string d, string p, bool a)
@@ -235,9 +253,6 @@ void CarSorting::insertionSort(Car** head)
 // Rent class methods
 void Rent::data(CManager* cm, Car* head, const string& type)
 {
-
-
-
     if (head == nullptr) {
         cout << "No cars available." << endl;
         return;
@@ -291,7 +306,7 @@ Car* CarBinarySearch::getNodeAt(Car* head, int index) {
     return nullptr;
 }
 // CarBinarySearch class methods
-Car* CarBinarySearch::binarySearchLinkedList(Car* head,string& targetCategory)
+Car* CarBinarySearch::binarySearchLinkedList(Car* head, string& targetCategory)
 {
     int n = countNodes(head);
     int low = 0;
@@ -319,6 +334,7 @@ Car* CarBinarySearch::binarySearchLinkedList(Car* head,string& targetCategory)
         // Check if the category matches the target category
         if (midCode == target)
         {
+            cout << "Car model " << targetCategory << " is found." << endl;
             return midNode;
         }
         else if (midCode < target)
@@ -330,37 +346,112 @@ Car* CarBinarySearch::binarySearchLinkedList(Car* head,string& targetCategory)
         }
     }
 
+    cout << "Car model " << targetCategory << " is not found." << endl;
     return nullptr;
 }
 
-void Rent:: calculate(string input2, double& total, int day, int hour, int halfday,double& rentalfee)
+
+void Rent::calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee)
 {
     this_thread::sleep_for(std::chrono::seconds(1));
-    system("CLS");
     cout << "Calculating rent. Please wait......" << endl;
     this_thread::sleep_for(std::chrono::seconds(2));
-    //DAY CALCULATION
+
+    // DAY CALCULATION
     if (input2 == "MA")
-        rentalfee = day *65;
+        rentalfee = day * 65;
     else if (input2 == "E1A")
         rentalfee = day * 130;
     else if (input2 == "E1B")
         rentalfee = day * 250;
-    //HALDAY CALCULATION
+    // HALF DAY CALCULATION
     else if (input2 == "MB")
         rentalfee = halfday * 35;
     else if (input2 == "E2A")
         rentalfee = halfday * 90;
     else if (input2 == "E2B")
         rentalfee = halfday * 190;
-    //HOUR CALCULATION
+    // HOUR CALCULATION
     else if (input2 == "MC")
         rentalfee = hour * 5;
-    else{}
+    else {}
+
     total += rentalfee;
     cout << "Your rental fee is RM " << fixed << setprecision(2) << total << endl;
-
 }
 
+
+//receipt copy function
+void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total)
+{
+    // Open the output file in append mode
+    ofstream outputfile("Invoice.txt", ios::out | ios::app);
+    if (!outputfile.is_open()) {
+        cerr << "Error: Unable to open file Invoice.txt for writing." << endl;
+        return;
+    }
+
+    // Write header and customer information
+    outputfile << "\n                       Car Rental - Customer Invoice                  " << endl;
+    outputfile << "  ***********************************************************************" << endl;
+    outputfile << "   Invoice No. :" << "------------------" << setw(10) << "#CNB12345" << endl;
+    outputfile << "   Customer Name:" << "-----------------" << setw(10) << customername << endl;
+
+    for (const auto& rental : rentals)
+    {
+        string cartypename;
+
+        // Determine vehicle type name based on cartype
+        if (rental.cartype == "M") {
+            cartypename = "Motorcycle Scooter";
+        }
+        else if (rental.cartype == "E1" || rental.cartype == "E2") {
+            cartypename = "Economy Car";
+        }
+
+        // Write vehicle type and model details
+        outputfile << " Vehicle Type : " << "--------------------" << setw(10) << cartypename << endl;
+        Car* car = cm->getHeadPtr(rental.cartype);
+        if (car != nullptr) {
+            outputfile << "  | Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
+            if (rental.cartype == "E1" || rental.cartype == "E2") {
+                outputfile << "  | Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
+            }
+        }
+        else {
+            cerr << "Error: No car found for cartype " << rental.cartype << endl;
+        }
+
+        // Write rental details based on input2 (type of rental)
+        if (rental.input2 == "MA" || rental.input2 == "E1A" || rental.input2 == "E1B") {
+            outputfile << "   Number of days :" << "---------------" << setw(10) << rental.day << endl;
+        }
+        else if (rental.input2 == "MB" || rental.input2 == "E2A" || rental.input2 == "E2B") {
+            outputfile << "   Number of days :" << "---------------" << setw(10) << rental.halfday << endl;
+        }
+        else if (rental.input2 == "MC") {
+            outputfile << "   Number of days :" << "---------------" << setw(10) << rental.hour << endl;
+        }
+        outputfile << "   Your Rental Amount is :" << "--------" << setw(10) << rental.rentalfee << " " << endl;
+    }
+
+    // Write footer and close the file
+    outputfile << "   Caution Money :" << "----------------" << setw(10) << "0" << " " << endl;
+    outputfile << "   Advanced :" << "---------------------" << setw(10) << "0" << " " << endl;
+    outputfile << "   ________________________________________________________" << endl;
+    outputfile << "\n";
+    outputfile << "   Total Rental Amount is :" << "-------" << setw(10) << total << " " << endl;
+    outputfile << "   ________________________________________________________" << endl;
+    outputfile << "   # This is a computer generated invoice and it does not" << endl;
+    outputfile << "   require an authorised signature #" << endl;
+    outputfile << " " << endl;
+    outputfile << " ***********************************************************************" << endl;
+    outputfile << "  You are advised to pay up the amount before due date." << endl;
+    outputfile << "  Otherwise penalty fee will be applied" << endl;
+    outputfile << " ***********************************************************************" << endl;
+
+    outputfile.close(); // Close the output file
+    cout << "Invoice generated successfully." << endl;
+}
 
 

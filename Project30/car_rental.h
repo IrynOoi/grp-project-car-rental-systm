@@ -4,8 +4,22 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
+
+struct RentalInfo 
+{
+    string customername;
+    string input2;
+    string cartype;
+    double rentalfee;
+    int day;
+    int hour;
+    int halfday;
+    string prev_cartype; // New field for previous car type
+    string prev_input2;  // New field for previous car model
+};
 // Forward declaration of CManager
 class CManager;
 
@@ -55,7 +69,8 @@ public:
 };
 
 
-class CarSorting {
+class CarSorting
+{
 public:
     void insertionSort(Car** head);
 };
@@ -65,7 +80,7 @@ class Rent
 public:
     void data(CManager* cm, Car* head, const string& type);
     void calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee);
-    void showrent(string customername, string cartype, int day, double rentalfee, CManager* cm, int order, double total);
+    void receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total);
 };
 class CarBinarySearch 
 {
@@ -76,7 +91,12 @@ private:
     Car* getNodeAt(Car* head, int position);
 };
 
-
+class customer 
+{
+    public:
+        bool isValidName(const string& name);
+        void customer_input(string& customername, CManager& cm, customer & customer, Car& car, CarBinarySearch & BS, vector<RentalInfo>& rentals, double& total);
+};
 
 #endif
 
