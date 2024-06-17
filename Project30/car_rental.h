@@ -17,8 +17,7 @@ struct RentalInfo
     int day;
     int hour;
     int halfday;
-    string prev_cartype; // New field for previous car type
-    string prev_input2;  // New field for previous car model
+    
 };
 
 // Welcome class definition
