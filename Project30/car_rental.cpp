@@ -15,10 +15,22 @@ int day;
 int hour;
 int halfday;
 
-// Implementation of the displayWelcomeMessage method
+// Welcome class implementation
 void Welcome::displayWelcomeMessage() {
-    std::cout << "Welcome to the Car Rental System!" << std::endl;
-    std::cout << "We are delighted to serve you." << std::endl;
+    readFromFile("welcome.txt");
+}
+void Welcome::readFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            std::cout << line << std::endl;
+        }
+        file.close();
+    }
+    else {
+        std::cerr << "Unable to open file: " << filename << std::endl;
+    }
 }
 
 bool customer::isValidName(const string& name) 

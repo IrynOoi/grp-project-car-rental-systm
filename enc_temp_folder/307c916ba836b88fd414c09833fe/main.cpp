@@ -4,7 +4,6 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib> // For exit()
-#include "Sentinel.h"
 using namespace std;
 
 int main()
@@ -16,7 +15,7 @@ int main()
     // Display the welcome message
     welcome.displayWelcomeMessage();
 
-    std::cout << "\nWelcome to the Stella Car Rental!" << std::endl;
+    std::cout << "\nWelcome to the Stella Car Rental !" << std::endl;
     std::cout << "We are delighted to serve you." << std::endl;
 
     int day=0, halfday=0,hour=0;
@@ -28,8 +27,7 @@ int main()
     string cartype;
     Car car;
     CarSorting sort;
-    CarBinarySearch BS;
-    SentinelSearch SS;
+    CarBinarySearch BS ;
     int order=0;
     customer customer;
  
@@ -89,7 +87,7 @@ int main()
                     c = toupper(c);
                 }
                 // Search and select car model loop
-                SS.sentinelSearch(cartype, &cm);
+                car.sentinelSearch(cartype, &cm);
 
                 do
                 {
