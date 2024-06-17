@@ -25,6 +25,8 @@ struct RentalInfo
 class Welcome {
 public:
     void displayWelcomeMessage();
+private:
+    void readFromFile(const std::string& filename);
 };
 
 // Forward declaration of CManager

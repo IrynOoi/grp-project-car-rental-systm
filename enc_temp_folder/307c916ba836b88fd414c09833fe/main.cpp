@@ -15,7 +15,7 @@ int main()
     // Display the welcome message
     welcome.displayWelcomeMessage();
 
-    std::cout << "\nWelcome to the Stella Car Rental!" << std::endl;
+    std::cout << "\nWelcome to the Stella Car Rental !" << std::endl;
     std::cout << "We are delighted to serve you." << std::endl;
 
     int day=0, halfday=0,hour=0;
