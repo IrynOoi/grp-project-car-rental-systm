@@ -64,8 +64,6 @@ public:
 };
 
 
-
-
 class CManager
 {
 private:
@@ -81,33 +79,11 @@ public:
 };
 
 
-class CarSorting
-{
-public:
-    void insertionSort(Car** head);
-};
-
-class Rent
-{
-public:
-    void data(CManager* cm, Car* head, const string& type);
-    void calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee);
-    void receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total);
-};
-class CarBinarySearch 
-{
-public:
-    Car* binarySearchLinkedList(Car* head,string& targetModel);
-private:
-    int countNodes(Car* head);
-    Car* getNodeAt(Car* head, int position);
-};
 
 class customer 
 {
     public:
         bool isValidName(const string& name);
-        void customer_input(string& customername, CManager& cm, customer & customer, Car& car, CarBinarySearch & BS, vector<RentalInfo>& rentals, double& total);
 };
 
 
@@ -134,7 +110,13 @@ void menu<T>::displayVehicleOptions(CManager* cm, const string& type, const stri
     cout << endl;
 }
 
-
+class Rent
+{
+public:
+    void data(CManager* cm, Car* head, const string& type);
+    void calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee);
+    void receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total);
+};
 
 #endif
 

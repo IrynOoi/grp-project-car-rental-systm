@@ -21,12 +21,27 @@
     <ClCompile Include="car_rental.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SentinelSearch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertionSort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BinarySearch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="car_rental.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sentinel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertionSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BinarySearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
