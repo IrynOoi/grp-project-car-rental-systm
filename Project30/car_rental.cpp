@@ -273,7 +273,8 @@ void CarSorting::insertionSort(Car** head)
 
 void Rent::data(CManager* cm, Car* head,const string& type)
 {
-    if (head == nullptr) {
+    if (head == nullptr)
+    {
         cout << "No cars available." << endl;
         return;
     }
@@ -286,10 +287,10 @@ void Rent::data(CManager* cm, Car* head,const string& type)
         vehicleMenu.displayVehicleOptions(cm, "M", "\t\033[4m1) Motorcycle Scooter (M)\033[0m");
     }
     else if (type == "E1") {
-        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m Economy car (1 day) (E1) \033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m2） Economy car (1 day) (E1) \033[0m");
     }
     else if (type == "E2") {
-        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m Economy car (halfday) (E2) \033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3） Economy car (halfday) (E2) \033[0m");
     }
 }
 

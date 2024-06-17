@@ -124,7 +124,8 @@ void menu<T>::displayVehicleOptions(CManager* cm, const string& type, const stri
     cout << header << endl;
     Car* vehicle = cm->getHeadPtr(type);
     char option = 'A'; // Start with option A
-    while (vehicle != nullptr) {
+    while (vehicle != nullptr) 
+    {
         cout << "\t  (" << type << option << ") " << vehicle->getDescription() << " - " << vehicle->getPrice() << endl;
         vehicle = vehicle->getNext();
         option++; // Increment option character (A, B, C, ...)
