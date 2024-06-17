@@ -8,6 +8,12 @@ using namespace std;
 
 int main()
 {
+    // Create a Welcome object
+    Welcome welcome;
+
+    // Display the welcome message
+    welcome.displayWelcomeMessage();
+
     int day=0, halfday=0,hour=0;
     double total = 0,rentalfee=0.0;
     string input2;

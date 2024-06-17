@@ -14,6 +14,11 @@ int day;
 int hour;
 int halfday;
 
+// Implementation of the displayWelcomeMessage method
+void Welcome::displayWelcomeMessage() {
+    std::cout << "Welcome to the Car Rental System!" << std::endl;
+    std::cout << "We are delighted to serve you." << std::endl;
+}
 
 bool customer::isValidName(const string& name) 
 {
