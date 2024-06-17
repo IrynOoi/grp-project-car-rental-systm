@@ -5,6 +5,7 @@
 #include <thread>
 #include <iomanip> 
 #include <fstream>
+#include <conio.h>
 #include <vector>
 using namespace std;
 
@@ -14,6 +15,7 @@ double rentalfee;
 int day;
 int hour;
 int halfday;
+
 
 // Welcome class implementation
 void Welcome::displayWelcomeMessage() 
@@ -32,6 +34,33 @@ void Welcome::readFromFile(const std::string& filename)
     }
     else {
         std::cerr << "Unable to open file: " << filename << std::endl;
+    }
+}
+
+void login() {
+    string pass = "";
+    char ch;
+    cout << "\n\n\n\n\n\n\n\n\STELLA CAR RENTAL \n\n";
+    cout << "\t------------------------------";
+    cout << "\n\tLOGIN \n";
+    cout << "\t------------------------------\n\n";
+    cout << "\tEnter Password: ";
+    ch = _getch();
+    while (ch != 13) {
+        pass.push_back(ch);
+        cout << '*';
+        ch = _getch();
+    }
+    if (pass == "admin") {
+        cout << "\n\n\n\tAccess Granted! \n";
+        system("PAUSE");
+        system("CLS");
+    }
+    else {
+        cout << "\n\n\tAccess Aborted...\n\tPlease Try Again\n\n";
+        system("PAUSE");
+        system("CLS");
+        login();
     }
 }
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib> // For exit()
+#include <conio.h>
 #include "Sentinel.h"
 using namespace std;
 
@@ -32,6 +33,8 @@ int main()
     SentinelSearch SS;
     int order=0;
     customer customer;
+
+    login();
  
     vector<RentalInfo> rentals; // Vector to store all rental information
 
@@ -58,7 +61,8 @@ int main()
     rent.data(&cm, cm.getHeadPtr("E1"), "E1");
     rent.data(&cm, cm.getHeadPtr("E2"), "E2");
 
-  
+    void login();
+
     do {
         cout << "\tPlease Enter your Name: "; // Customer name input loop
         getline(cin, customername);
@@ -217,4 +221,5 @@ int main()
     }
     return 0;
 }
+
 
