@@ -109,6 +109,31 @@ class customer
         void customer_input(string& customername, CManager& cm, customer & customer, Car& car, CarBinarySearch & BS, vector<RentalInfo>& rentals, double& total);
 };
 
+
+
+template <class T>
+class menu {
+public:
+    void displayVehicleOptions(CManager* cm, const string& type, const string& header);
+};
+
+
+template <class T>
+void menu<T>::displayVehicleOptions(CManager* cm, const string& type, const string& header)
+{
+    cout << header << endl;
+    Car* vehicle = cm->getHeadPtr(type);
+    char option = 'A'; // Start with option A
+    while (vehicle != nullptr) {
+        cout << "\t  (" << type << option << ") " << vehicle->getDescription() << " - " << vehicle->getPrice() << endl;
+        vehicle = vehicle->getNext();
+        option++; // Increment option character (A, B, C, ...)
+    }
+    cout << endl;
+}
+
+
+
 #endif
 
 

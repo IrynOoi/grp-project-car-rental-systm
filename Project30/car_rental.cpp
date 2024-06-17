@@ -16,10 +16,12 @@ int hour;
 int halfday;
 
 // Welcome class implementation
-void Welcome::displayWelcomeMessage() {
+void Welcome::displayWelcomeMessage() 
+{
     readFromFile("welcome.txt");
 }
-void Welcome::readFromFile(const std::string& filename) {
+void Welcome::readFromFile(const std::string& filename) 
+{
     std::ifstream file(filename);
     if (file.is_open()) {
         std::string line;
@@ -268,36 +270,29 @@ void CarSorting::insertionSort(Car** head)
 }
 
 // Rent class methods
-void Rent::data(CManager* cm, Car* head, const string& type)
+
+void Rent::data(CManager* cm, Car* head,const string& type)
 {
     if (head == nullptr) {
         cout << "No cars available." << endl;
         return;
     }
 
-    // Display the options directly based on the type
+    menu<string> vehicleMenu;
     cout << "\tPlease select a type of vehicle" << endl;
     cout << "\tType of vehicles : " << endl;
 
     if (type == "M") {
-        cout << "\t\033[4m1) Motorcycle Scooter (M)\033[0m" << endl;
-        cout << "\t  (MA) " << cm->getHeadPtr("M")->getDescription() << " - " << cm->getHeadPtr("M")->getPrice() << endl;
-        cout << "\t  (MB) " << cm->getHeadPtr("M")->getNext()->getDescription() << " - " << cm->getHeadPtr("M")->getNext()->getPrice() << endl;
-        cout << "\t  (MC) " << cm->getHeadPtr("M")->getNext()->getNext()->getDescription() << " - " << cm->getHeadPtr("M")->getNext()->getNext()->getPrice() << endl;
+        vehicleMenu.displayVehicleOptions(cm, "M", "\t\033[4m1) Motorcycle Scooter (M)\033[0m");
     }
     else if (type == "E1") {
-        cout << "\t\033[4m Economy car (1 day) (E1) \033[0m" << endl;
-        cout << "\t(E1A) " << cm->getHeadPtr("E1")->getDescription() << " - " << cm->getHeadPtr("E1")->getPrice() << endl;
-        cout << "\t(E2B) " << cm->getHeadPtr("E1")->getNext()->getDescription() << " - " << cm->getHeadPtr("E1")->getNext()->getPrice() << endl;
+        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m Economy car (1 day) (E1) \033[0m");
     }
     else if (type == "E2") {
-        cout << "\t\033[4m Economy car (halfday) (E2) \033[0m" << endl;
-        cout << "\t(E2A) " << cm->getHeadPtr("E2")->getDescription() << " - " << cm->getHeadPtr("E2")->getPrice() << endl;
-        cout << "\t(E2B) " << cm->getHeadPtr("E2")->getNext()->getDescription() << " - " << cm->getHeadPtr("E2")->getNext()->getPrice() << endl;
+        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m Economy car (halfday) (E2) \033[0m");
     }
-
-    cout << endl;
 }
+
 // CarBinarySearch class methods
 int CarBinarySearch::countNodes(Car* head) {
     int count = 0;

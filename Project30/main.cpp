@@ -16,8 +16,8 @@ int main()
     // Display the welcome message
     welcome.displayWelcomeMessage();
 
-    std::cout << "\nWelcome to the Stella Car Rental!" << std::endl;
-    std::cout << "We are delighted to serve you." << std::endl;
+    cout << "\nWelcome to the Stella Car Rental!" << std::endl;
+    cout << "We are delighted to serve you." << std::endl;
 
     int day=0, halfday=0,hour=0;
     double total = 0,rentalfee=0.0;
@@ -36,7 +36,7 @@ int main()
     vector<RentalInfo> rentals; // Vector to store all rental information
 
     // Add cars to the respective lists
-    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",false); //(MA)Motorcycle Scooter - 1 day
+    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",true); //(MA)Motorcycle Scooter - 1 day
     car.addCar(cm.getHead("M"), "MB", "Halfday", "RM35", true);//(MB)Motorcycle Scooter - halfday
     car.addCar(cm.getHead("M"), "MC", "1 hour", "RM5.00", true);//(MC)Motorcycle Scooter-1 hour
     //1 day
