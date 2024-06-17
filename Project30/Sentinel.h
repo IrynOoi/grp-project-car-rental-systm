@@ -1,13 +1,11 @@
-// Sequential.h
-/*#ifndef SEQUENTIAL_H
-#define SEQUENTIAL_H
+//sentinel.h
 
-#define SIZE 3
+#ifndef SENTINEL_H
+#define SENTINEL_H
 
-class Sentinel {
+class SentinelSearch
+{
 public:
-    
+    Car* sentinelSearch(string targetCategory, CManager* cm);
 };
-
 #endif
-*/

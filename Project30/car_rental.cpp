@@ -1,5 +1,6 @@
 ﻿//car rental.cpp
 #include "car_rental.h"
+#include "Sentinel.h"
 #include <iostream>
 #include <thread>
 #include <iomanip> 
@@ -102,8 +103,8 @@ void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
     }
 }
 
-// Method to search for a specific category of cars using sentinel node technique
-Car* Car::sentinelSearch(string targetCategory, CManager* cm)
+class Car;
+Car* SentinelSearch::sentinelSearch(string targetCategory, CManager* cm)
 {
     // Check if the target category is valid (must be "M", "E1", or "E2")
     if (targetCategory != "M" && targetCategory != "E1" && targetCategory != "E2")
@@ -169,7 +170,6 @@ Car* Car::sentinelSearch(string targetCategory, CManager* cm)
 
     return found; // Return the found car node or nullptr
 }
-
 
 
 

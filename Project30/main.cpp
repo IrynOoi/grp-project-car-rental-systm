@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib> // For exit()
+#include "Sentinel.h"
 using namespace std;
 
 int main()
@@ -23,7 +24,8 @@ int main()
     string cartype;
     Car car;
     CarSorting sort;
-    CarBinarySearch BS ;
+    CarBinarySearch BS;
+    SentinelSearch SS;
     int order=0;
     customer customer;
  
@@ -83,7 +85,7 @@ int main()
                     c = toupper(c);
                 }
                 // Search and select car model loop
-                car.sentinelSearch(cartype, &cm);
+                SS.sentinelSearch(cartype, &cm);
 
                 do
                 {

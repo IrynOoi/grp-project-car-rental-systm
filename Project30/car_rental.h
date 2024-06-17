@@ -52,14 +52,16 @@ public:
 
     // Setter method
     void setNext(Car* n);
-    Car* sentinelSearch(string targetCategory, CManager* cm);
     void addCar(Car** headPtr, string c, string d, string p, bool a);
     void displayCars(Car* head);
     // Declare  friend class
     friend class CManager;
     friend class CarBinarySearch;
-
+    friend class SentinelSearch;
 };
+
+
+
 
 class CManager
 {
