@@ -1,5 +1,7 @@
 // main.cpp
 #include "car_rental.h"
+#include "InsertionSort.h"
+#include "BinarySearch.h"
 #include <iostream>
 #include <vector>
 #include <fstream>

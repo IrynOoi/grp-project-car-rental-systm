@@ -1,6 +1,7 @@
 ﻿//car rental.cpp
 #include "car_rental.h"
 #include "Sentinel.h"
+#include "InsertionSort.h"
 #include <iostream>
 #include <thread>
 #include <iomanip> 
@@ -117,77 +118,6 @@ void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
     }
 }
 
-class Car;
-Car* SentinelSearch::sentinelSearch(string targetCategory, CManager* cm)
-{
-    // Check if the target category is valid (must be "M", "E1", or "E2")
-    if (targetCategory != "M" && targetCategory != "E1" && targetCategory != "E2")
-    {
-        cout << "Invalid input" << endl;
-        return nullptr; // Return nullptr if category is invalid
-    }
-
-    // Create a sentinel with a category-specific code and default values
-    Car* sentinel = new Car(nullptr, targetCategory + "X", "", "", false);
-
-    // Retrieve the head pointer of the specified category from the Car Manager
-    Car* temp = cm->getHeadPtr(targetCategory);
-
-    // Check if the head pointer is nullptr (no cars of this category)
-    if (temp == nullptr)
-    {
-        cout << "Car type " << targetCategory << " not found." << endl;
-        delete sentinel; // Delete the sentinel node
-        return nullptr;  // Return nullptr if no cars found
-    }
-
-    // Traverse the list until the end to find the last node
-    while (temp->getNext() != nullptr)
-    {
-        temp = temp->getNext();
-    }
-
-    // Set the next of the last node to point to the sentinel node
-    temp->setNext(sentinel);
-
-    // Reset temp to the head of the list to start searching for the category
-    temp = cm->getHeadPtr(targetCategory);
-
-    // Traverse the list until finding a node with the target category code
-    while (!(temp->getCode().substr(0, 1) == targetCategory || temp->getCode().substr(0, 2) == targetCategory))
-    {
-        temp = temp->getNext(); // Move to the next car node
-    }
-
-    Car* found = nullptr;
-    // Check if the found node is not the sentinel (valid car found)
-    if (temp != sentinel)
-    {
-        found = temp; // Assign found car node
-        cout << "Category " << targetCategory << " found!" << endl;
-    }
-    else
-    {
-        cout << "Category " << targetCategory << " not found." << endl;
-    }
-
-    // Reset the next of the last node to nullptr to detach the sentinel
-    Car* last = cm->getHeadPtr(targetCategory);
-    while (last->getNext() != sentinel)
-    {
-        last = last->getNext();
-    }
-    last->setNext(nullptr);
-
-    // Delete the sentinel node after searching is complete
-    delete sentinel;
-
-    return found; // Return the found car node or nullptr
-}
-
-
-
-
 void Car::displayCars(Car* head)
 {
     if (head == nullptr)
@@ -238,37 +168,6 @@ Car* CManager::getHeadPtr(string type)
     return nullptr;
 }
 
-// CarSorting class methods
-void CarSorting::insertionSort(Car** head)
-{
-    if (*head == nullptr) return;
-
-    Car* sorted = nullptr;
-    Car* current = *head;
-
-    while (current != nullptr)
-    {
-        Car* next = current->getNext();
-        if (sorted == nullptr || sorted->getCode() >= current->getCode())
-        {
-            current->setNext(sorted);
-            sorted = current;
-        }
-        else
-        {
-            Car* temp = sorted;
-            while (temp->getNext() != nullptr && temp->getNext()->getCode() < current->getCode())
-            {
-                temp = temp->getNext();
-            }
-            current->setNext(temp->getNext());
-            temp->setNext(current);
-        }
-        current = next;
-    }
-    *head = sorted;
-}
-
 // Rent class methods
 
 void Rent::data(CManager* cm, Car* head,const string& type)
@@ -292,75 +191,6 @@ void Rent::data(CManager* cm, Car* head,const string& type)
     else if (type == "E2") {
         vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3） Economy car (halfday) (E2) \033[0m");
     }
-}
-
-// CarBinarySearch class methods
-int CarBinarySearch::countNodes(Car* head) {
-    int count = 0;
-    Car* current = head;
-    while (current != nullptr) {
-        count++;
-        current = current->getNext();
-    }
-    return count;
-}
-
-
-Car* CarBinarySearch::getNodeAt(Car* head, int index) {
-    int count = 0;
-    Car* current = head;
-    while (current != nullptr) {
-        if (count == index) {
-            return current;
-        }
-        count++;
-        current = current->getNext();
-    }
-    return nullptr;
-}
-// CarBinarySearch class methods
-Car* CarBinarySearch::binarySearchLinkedList(Car* head, string& targetCategory)
-{
-    int n = countNodes(head);
-    int low = 0;
-    int high = n - 1;
-
-    // Convert target category to uppercase for case-insensitive comparison
-    string target = targetCategory;
-    for (char& c : target)
-    {
-        c = toupper(c);
-    }
-
-    while (low <= high)
-    {
-        int mid = low + (high - low) / 2;
-        Car* midNode = getNodeAt(head, mid);
-
-        // Convert midNode's code to uppercase for case-insensitive comparison
-        string midCode = midNode->getCode();
-        for (char& c : midCode)
-        {
-            c = toupper(c);
-        }
-
-        // Check if the category matches the target category
-        if (midCode == target)
-        {
-            cout << "Car model " << targetCategory << " is found." << endl;
-            return midNode;
-        }
-        else if (midCode < target)
-        {
-            low = mid + 1;
-        }
-        else {
-            high = mid - 1;
-        }
-    }
-
-    cout << "Car model " << targetCategory << " is not found." << endl;
-    return nullptr;
 }
 
 
@@ -398,11 +228,13 @@ void Rent::calculate(string input2, double& total, int day, int hour, int halfda
 void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total)
 {
     // Open the output file in append mode
-    ofstream outputfile("Invoice.txt", ios::out | ios::app);
+    ofstream outputfile("Invoice.txt", ios::out);
     if (!outputfile.is_open()) {
         cerr << "Error: Unable to open file Invoice.txt for writing." << endl;
         return;
     }
+
+
 
     // Write header and customer information
     outputfile << "\n                       Car Rental - Customer Invoice                  " << endl;
