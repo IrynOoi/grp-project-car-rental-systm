@@ -41,7 +41,7 @@ int main()
     vector<RentalInfo> rentals; // Vector to store all rental information
 
     // Add cars to the respective lists
-    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",true); //(MA)Motorcycle Scooter - 1 day
+    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",false); //(MA)Motorcycle Scooter - 1 day
     car.addCar(cm.getHead("M"), "MB", "Halfday", "RM35", true);//(MB)Motorcycle Scooter - halfday
     car.addCar(cm.getHead("M"), "MC", "1 hour", "RM5.00", true);//(MC)Motorcycle Scooter-1 hour
     //1 day
@@ -87,14 +87,16 @@ int main()
        
             do
             {
-                cout << "\nEnter the car type you want to search (M, E1, E2): ";
-                cin >> cartype;
-                // Convert cartype to uppercase
-                for (char& c : cartype)
-                {
-                    c = toupper(c);
-                }
-                // Search and select car model loop
+
+                // Car type selection loop
+                do {
+                    cout << "\nEnter the car type you want to search (M, E1, E2): ";
+                    cin >> cartype;
+                    // Convert cartype to uppercase
+                    for (char& c : cartype) {
+                        c = toupper(c);
+                    }
+                } while (cartype != "M" && cartype != "E1" && cartype != "E2");
                 SS.sentinelSearch(cartype, &cm);
 
                 do

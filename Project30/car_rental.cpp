@@ -38,36 +38,45 @@ void Welcome::readFromFile(const std::string& filename)
     }
 }
 
-void login() 
-{
+// Function to handle user login
+void login() {
     string pass = "";  // Initialize an empty string to store the password
-    char ch;  // Declare a character variable to store each character of the password
+    char ch = ' ';  // Initialize a character variable to store each character of the password
 
-    cout << "\n\n\n\n\n\n\n\n\STELLA CAR RENTAL \n\n";  // Display title for the login screen
-    cout << "\t------------------------------";  // Display decorative line
-    cout << "\n\tLOGIN \n";  // Display login section header
-    cout << "\t------------------------------\n\n";  // Display decorative line break
-    cout << "\tEnter Password: ";  // Prompt the user to enter the password
+    // Display login screen header
+    cout << "\n\n\n\n\n\n\n\nSTELLAR CAR RENTAL \n\n";
+    cout << "\t------------------------------\n";
+    cout << "\tLOGIN \n";
+    cout << "\t------------------------------\n\n";
+    cout << "\tEnter Password: ";
 
-    ch = _getch();  // Read the first character of the password without displaying it on screen
+    // Read characters until Enter (ASCII code 13) is pressed
+    while (true) {
+        ch = _getch();  // Read the next character of the password without echoing it
 
-    // Continue reading characters until Enter (ASCII code 13) is pressed
-    while (ch != 13) {
-        pass.push_back(ch);  // Append the character to the password string
-        cout << '*';  // Print an asterisk to mask the password character
-        ch = _getch();  // Read the next character of the password
+        if (ch == 13) {  // Check if Enter key is pressed
+            break;  // Exit the loop if Enter is pressed
+        }
+        else if (ch == 8) {  // Check if Backspace key is pressed
+            if (!pass.empty()) {  // Check if password string is not empty
+                pass.pop_back();  // Remove the last character from password
+                cout << "\b \b";  // Move cursor back, print space to erase, move cursor back again
+            }
+        }
+        else {  // For regular characters
+            pass.push_back(ch);  // Append the character to the password string
+            cout << '*';  // Print an asterisk to mask the password character on the screen
+        }
     }
 
     // Check if the entered password matches the expected password "admin"
-    if (pass == "admin") 
-    {
-        cout << "\n\n\n\tAccess Granted! \n";  // Display access granted message
+    if (pass == "admin") {
+        cout << "\n\n\n\tAccess Granted! \n";
         system("PAUSE");  // Pause the program to allow user to read the message
         system("CLS");  // Clear the screen for security after successful login
     }
-    else 
-    {
-        cout << "\n\n\tAccess Aborted...\n\tPlease Try Again\n\n";  // Display access denied message
+    else {
+        cout << "\n\n\tAccess Denied...\n\tPlease Try Again\n\n";
         system("PAUSE");  // Pause the program to allow user to read the message
         system("CLS");  // Clear the screen for security after failed login
         login();  // Recursively call login() function to allow user to retry login
@@ -177,6 +186,15 @@ CManager::CManager()
     headE2 = nullptr;  // Initialize head pointer for type "E2" cars to null
 }
 
+Car*CManager::getHeadPtr(string type)
+{
+    if (type == "M") return headM;
+    if (type == "E1") return headE1;
+    if (type == "E2") return headE2;
+    return nullptr;
+}
+
+
 
 Car** CManager::getHead(string type)
 {
@@ -199,12 +217,7 @@ Car** CManager::getHead(string type)
 
 
 
-CManager::CManager()
-{
-    headM = nullptr;  // Initialize head pointer for motorcycles to nullptr
-    headE1 = nullptr;  // Initialize head pointer for economy cars (1 day) to nullptr
-    headE2 = nullptr;  // Initialize head pointer for economy cars (half day) to nullptr
-}
+ 
 
 // Rent class methods
 
@@ -233,6 +246,8 @@ void Rent::data(CManager* cm, Car* head, const string& type)
         vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3) Economy car (halfday) (E2) \033[0m");  // Display options for economy cars (half day)
     }
 }
+
+
 
 
 
