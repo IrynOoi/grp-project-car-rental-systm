@@ -287,13 +287,11 @@ void Rent::calculate(string input2, double& total, int day, int hour, int halfda
 void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total)
 {
     // Open the output file in append mode
-    ofstream outputfile("Invoice.txt", ios::out|| ios::app );
+    ofstream outputfile("Invoice.txt", ios::out | ios::app);
     if (!outputfile.is_open()) {
         cerr << "Error: Unable to open file Invoice.txt for writing." << endl;
         return;
     }
-
-
 
     // Write header and customer information
     outputfile << "\n                       Car Rental - Customer Invoice                  " << endl;
@@ -317,9 +315,9 @@ void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManag
         outputfile << " Vehicle Type : " << "--------------------" << setw(10) << cartypename << endl;
         Car* car = cm->getHeadPtr(rental.cartype);
         if (car != nullptr) {
-            outputfile << "   Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
+            outputfile << "  | Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
             if (rental.cartype == "E1" || rental.cartype == "E2") {
-                outputfile << "   Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
+                outputfile << "  | Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
             }
         }
         else {
@@ -357,5 +355,3 @@ void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManag
     outputfile.close(); // Close the output file
     cout << "Invoice generated successfully." << endl;
 }
-
-
