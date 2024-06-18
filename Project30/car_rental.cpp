@@ -315,9 +315,9 @@ void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManag
         outputfile << " Vehicle Type : " << "--------------------" << setw(10) << cartypename << endl;
         Car* car = cm->getHeadPtr(rental.cartype);
         if (car != nullptr) {
-            outputfile << "  | Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
+            outputfile << "   Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
             if (rental.cartype == "E1" || rental.cartype == "E2") {
-                outputfile << "  | Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
+                outputfile << "   Car Detail. :" << "----------------------" << setw(10) << car->getDescription()  << endl;
             }
         }
         else {
