@@ -38,37 +38,49 @@ void Welcome::readFromFile(const std::string& filename)
     }
 }
 
-void login() {
-    string pass = "";
-    char ch;
-    cout << "\n\n\n\n\n\n\n\n\STELLA CAR RENTAL \n\n";
-    cout << "\t------------------------------";
-    cout << "\n\tLOGIN \n";
-    cout << "\t------------------------------\n\n";
-    cout << "\tEnter Password: ";
-    ch = _getch();
+void login() 
+{
+    string pass = "";  // Initialize an empty string to store the password
+    char ch;  // Declare a character variable to store each character of the password
+
+    cout << "\n\n\n\n\n\n\n\n\STELLA CAR RENTAL \n\n";  // Display title for the login screen
+    cout << "\t------------------------------";  // Display decorative line
+    cout << "\n\tLOGIN \n";  // Display login section header
+    cout << "\t------------------------------\n\n";  // Display decorative line break
+    cout << "\tEnter Password: ";  // Prompt the user to enter the password
+
+    ch = _getch();  // Read the first character of the password without displaying it on screen
+
+    // Continue reading characters until Enter (ASCII code 13) is pressed
     while (ch != 13) {
-        pass.push_back(ch);
-        cout << '*';
-        ch = _getch();
+        pass.push_back(ch);  // Append the character to the password string
+        cout << '*';  // Print an asterisk to mask the password character
+        ch = _getch();  // Read the next character of the password
     }
-    if (pass == "admin") {
-        cout << "\n\n\n\tAccess Granted! \n";
-        system("PAUSE");
-        system("CLS");
+
+    // Check if the entered password matches the expected password "admin"
+    if (pass == "admin") 
+    {
+        cout << "\n\n\n\tAccess Granted! \n";  // Display access granted message
+        system("PAUSE");  // Pause the program to allow user to read the message
+        system("CLS");  // Clear the screen for security after successful login
     }
-    else {
-        cout << "\n\n\tAccess Aborted...\n\tPlease Try Again\n\n";
-        system("PAUSE");
-        system("CLS");
-        login();
+    else 
+    {
+        cout << "\n\n\tAccess Aborted...\n\tPlease Try Again\n\n";  // Display access denied message
+        system("PAUSE");  // Pause the program to allow user to read the message
+        system("CLS");  // Clear the screen for security after failed login
+        login();  // Recursively call login() function to allow user to retry login
     }
 }
 
+
 bool customer::isValidName(const string& name) 
 {
-    for (char c : name) {
-        if (isdigit(c)) {
+    for (char c : name) 
+    {
+        if (isdigit(c)) 
+        {
             return false; // Invalid if any character is a digit
         }
     }
@@ -160,104 +172,107 @@ void Car::displayCars(Car* head)
 // CManager class methods
 CManager::CManager()
 {
-    headM = nullptr;
-    headE1 = nullptr;
-    headE2 = nullptr;
+    headM = nullptr;  // Initialize head pointer for type "M" cars to null
+    headE1 = nullptr;  // Initialize head pointer for type "E1" cars to null
+    headE2 = nullptr;  // Initialize head pointer for type "E2" cars to null
 }
+
 
 Car** CManager::getHead(string type)
 {
-    CarSorting carSorting; // Create an instance of CarSorting
+    CarSorting carSorting;  // Create an instance of CarSorting to sort the linked lists
 
     if (type == "M") {
-        // Sort the linked list of type "M" before returning the head pointer
-        carSorting.insertionSort(&headM);
-        return &headM;
+        carSorting.insertionSort(&headM);  // Sort the linked list of motorcycles
+        return &headM;  // Return a pointer to the head pointer of motorcycles
     }
     if (type == "E1") {
-        // Sort the linked list of type "E1" before returning the head pointer
-        carSorting.insertionSort(&headE1);
-        return &headE1;
+        carSorting.insertionSort(&headE1);  // Sort the linked list of economy cars (1 day)
+        return &headE1;  // Return a pointer to the head pointer of economy cars (1 day)
     }
     if (type == "E2") {
-        // Sort the linked list of type "E2" before returning the head pointer
-        carSorting.insertionSort(&headE2);
-        return &headE2;
+        carSorting.insertionSort(&headE2);  // Sort the linked list of economy cars (half day)
+        return &headE2;  // Return a pointer to the head pointer of economy cars (half day)
     }
-    return nullptr;
+    return nullptr;  // Return nullptr if the type is invalid
 }
 
 
 
-Car* CManager::getHeadPtr(string type)
+CManager::CManager()
 {
-    if (type == "M") return headM;
-    if (type == "E1") return headE1;
-    if (type == "E2") return headE2;
-    return nullptr;
+    headM = nullptr;  // Initialize head pointer for motorcycles to nullptr
+    headE1 = nullptr;  // Initialize head pointer for economy cars (1 day) to nullptr
+    headE2 = nullptr;  // Initialize head pointer for economy cars (half day) to nullptr
 }
 
 // Rent class methods
 
-void Rent::data(CManager* cm, Car* head,const string& type)
+void Rent::data(CManager* cm, Car* head, const string& type)
 {
+    // Check if there are cars available for the specified type
     if (head == nullptr)
     {
-        cout << "No cars available." << endl;
-        return;
+        cout << "No cars available." << endl;  // Display message if no cars are found
+        return;  // Exit the function early if no cars are available
     }
 
-    menu<string> vehicleMenu;
-    cout << "\tPlease select a type of vehicle" << endl;
-    cout << "\tType of vehicles : " << endl;
+    menu<string> vehicleMenu;  // Create a menu object for displaying vehicle options
 
+    cout << "\tPlease select a type of vehicle" << endl;  // Prompt user to select a vehicle type
+    cout << "\tType of vehicles : " << endl;  // Display header for vehicle types
+
+    // Display vehicle options based on the provided type
     if (type == "M") {
-        vehicleMenu.displayVehicleOptions(cm, "M", "\t\033[4m1) Motorcycle Scooter (M)\033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "M", "\t\033[4m1) Motorcycle Scooter (M)\033[0m");  // Display options for motorcycles
     }
     else if (type == "E1") {
-        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m2） Economy car (1 day) (E1) \033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m2) Economy car (1 day) (E1) \033[0m");  // Display options for economy cars (1 day)
     }
     else if (type == "E2") {
-        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3） Economy car (halfday) (E2) \033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3) Economy car (halfday) (E2) \033[0m");  // Display options for economy cars (half day)
     }
 }
+
 
 
 void Rent::calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee)
 {
-    this_thread::sleep_for(std::chrono::seconds(1));
-    cout << "Calculating rent. Please wait......" << endl;
-    this_thread::sleep_for(std::chrono::seconds(2));
+    this_thread::sleep_for(std::chrono::seconds(1));  // Pause execution for 1 second for simulation purposes
+    cout << "Calculating rent. Please wait......" << endl;  // Inform the user about the ongoing calculation
+    this_thread::sleep_for(std::chrono::seconds(2));  // Pause execution for 2 seconds for simulation purposes
 
     // DAY CALCULATION
     if (input2 == "MA")
-        rentalfee = day * 65;
+        rentalfee = day * 65;  // Calculate rental fee for Motorcycle Scooter (M) for full day
     else if (input2 == "E1A")
-        rentalfee = day * 130;
+        rentalfee = day * 130;  // Calculate rental fee for Economy car (1 day) type A (E1A)
     else if (input2 == "E1B")
-        rentalfee = day * 250;
+        rentalfee = day * 250;  // Calculate rental fee for Economy car (1 day) type B (E1B)
+
     // HALF DAY CALCULATION
     else if (input2 == "MB")
-        rentalfee = halfday * 35;
+        rentalfee = halfday * 35;  // Calculate rental fee for Motorcycle Scooter (M) for half day
     else if (input2 == "E2A")
-        rentalfee = halfday * 90;
+        rentalfee = halfday * 90;  // Calculate rental fee for Economy car (half day) type A (E2A)
     else if (input2 == "E2B")
-        rentalfee = halfday * 190;
+        rentalfee = halfday * 190;  // Calculate rental fee for Economy car (half day) type B (E2B)
+
     // HOUR CALCULATION
     else if (input2 == "MC")
-        rentalfee = hour * 5;
-    else {}
+        rentalfee = hour * 5;  // Calculate rental fee for Motorcycle Scooter (M) per hour
 
-    total += rentalfee;
-    cout << "Your rental fee is RM " << fixed << setprecision(2) << total << endl;
+    total += rentalfee;  // Update total rental fee with the calculated rental fee
+    cout << "Your rental fee is RM " << fixed << setprecision(2) << total << endl;  // Display the total rental fee to the user
 }
+
 
 
 //receipt copy function
 void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total)
 {
     // Open the output file in append mode
-    ofstream outputfile("Invoice.txt", ios::out);
+    ofstream outputfile("Invoice.txt", ios::out|| ios::app );
     if (!outputfile.is_open()) {
         cerr << "Error: Unable to open file Invoice.txt for writing." << endl;
         return;
@@ -287,9 +302,9 @@ void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManag
         outputfile << " Vehicle Type : " << "--------------------" << setw(10) << cartypename << endl;
         Car* car = cm->getHeadPtr(rental.cartype);
         if (car != nullptr) {
-            outputfile << "  | Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
+            outputfile << "   Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
             if (rental.cartype == "E1" || rental.cartype == "E2") {
-                outputfile << "  | Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
+                outputfile << "   Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
             }
         }
         else {
