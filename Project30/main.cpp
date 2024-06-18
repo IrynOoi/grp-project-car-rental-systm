@@ -6,7 +6,6 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib> // For exit()
-#include <conio.h>
 #include "Sentinel.h"
 using namespace std;
 
@@ -44,7 +43,7 @@ int main()
     car.addCar(cm.getHead("M"), "MB", "Halfday", "RM35", true);//(MB)Motorcycle Scooter - halfday
     car.addCar(cm.getHead("M"), "MC", "1 hour", "RM5.00", true);//(MC)Motorcycle Scooter-1 hour
     //1 day
-    car.addCar(cm.getHead("E1"), "E1B", "6 Seater Car", "RM250.00", false); //(E1B) 6 Seater Car
+    car.addCar(cm.getHead("E1"), "E1B", "6 Seater Car", "RM250.00", true); //(E1B) 6 Seater Car
     car.addCar(cm.getHead("E1"), "E1A", "4 Seater Car", "RM130.00", true); //(E1A) Axia / Kelisa Auto
     //halfday
     car.addCar(cm.getHead("E2"), "E2A", "4 Seater Car", "RM90.00", true);//(E2A) Axia / Kelisa Auto
@@ -116,11 +115,11 @@ int main()
             {
                 cout << "However,Car model " << input2 << " is not available for now." << endl;
 
-                cout << "Do you want to add more cars to your cart? (Y/N): ";
+                cout << "Do you want to choose another car to your cart? (Y/N): ";
                 cin >> input3;
                 cout << endl;
                 if (input3 != 'Y' && input3 != 'y') {
-                    exit(0); // Exit the loop if the user does not want to add more cars
+                    exit(0); // Exit the loop if the user does not want to choose another car
                 }
 
             }
