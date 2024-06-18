@@ -39,7 +39,8 @@ void Welcome::readFromFile(const std::string& filename)
 }
 
 // Function to handle user login
-void login() {
+void login() 
+{
     string pass = "";  // Initialize an empty string to store the password
     char ch = ' ';  // Initialize a character variable to store each character of the password
 
@@ -84,7 +85,7 @@ void login() {
 }
 
 
-bool customer::isValidName(const string& name) 
+bool customer::isValidName(const string& name) //OOI XIEN XIEN
 {
     for (char c : name) 
     {
@@ -97,7 +98,7 @@ bool customer::isValidName(const string& name)
 }
 // Car class methods
 // Constructor for initializing a Car object with parameters
-Car::Car(Car* n, string c, string d, string p, bool a)
+Car::Car(Car* n, string c, string d, string p, bool a)//OOI XIEN XIEN
 {
     code = c;           // Initialize car code
     description = d;    // Initialize description
@@ -107,49 +108,49 @@ Car::Car(Car* n, string c, string d, string p, bool a)
 }
 
 // Default constructor for Car class
-Car::Car()
+Car::Car()//OOI XIEN XIEN
 {
     next = nullptr;     // Initialize next pointer to nullptr
 }
 
 // Getter for retrieving price of a car
-string Car::getPrice()
+string Car::getPrice()//OOI XIEN XIEN
 {
     return price;       // Return price of the car
 }
 
 // Getter for retrieving code of a car
-string Car::getCode()
+string Car::getCode()//OOI XIEN XIEN
 {
     return code;        // Return code of the car
 }
 
 // Getter for retrieving description of a car
-string Car::getDescription()
+string Car::getDescription()//OOI XIEN XIEN
 {
     return description; // Return description of the car
 }
 
 // Getter for checking availability of a car
-bool Car::isAvailable()
+bool Car::isAvailable()//OOI XIEN XIEN
 {
     return available;   // Return availability status of the car
 }
 
 // Getter for retrieving the next car in the list
-Car* Car::getNext()
+Car* Car::getNext()//OOI XIEN XIEN
 {
     return next;        // Return pointer to the next car in the list
 }
 
 // Setter for setting the next car in the list
-void Car::setNext(Car* n)
+void Car::setNext(Car* n)//OOI XIEN XIEN
 {
     next = n;           // Set next pointer to point to another car
 }
 
 // Method to add a new car to the end of the linked list
-void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
+void Car::addCar(Car** headPtr, string c, string d, string p, bool a)//OOI XIEN XIEN
 {
     Car* newCar = new Car(nullptr, c, d, p, a);  // Create a new car object
 
@@ -168,7 +169,7 @@ void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
     }
 }
 
-void Car::displayCars(Car* head)
+void Car::displayCars(Car* head)//OOI XIEN XIEN
 {
     if (head == nullptr)
     {
@@ -179,14 +180,14 @@ void Car::displayCars(Car* head)
 
 
 // CManager class methods
-CManager::CManager()
+CManager::CManager()//OOI XIEN XIEN
 {
     headM = nullptr;  // Initialize head pointer for type "M" cars to null
     headE1 = nullptr;  // Initialize head pointer for type "E1" cars to null
     headE2 = nullptr;  // Initialize head pointer for type "E2" cars to null
 }
 
-Car*CManager::getHeadPtr(string type)
+Car*CManager::getHeadPtr(string type)//OOI XIEN XIEN
 {
     if (type == "M") return headM;
     if (type == "E1") return headE1;
@@ -196,7 +197,7 @@ Car*CManager::getHeadPtr(string type)
 
 
 
-Car** CManager::getHead(string type)
+Car** CManager::getHead(string type)//OOI XIEN XIEN
 {
     CarSorting carSorting;  // Create an instance of CarSorting to sort the linked lists
 
@@ -221,7 +222,7 @@ Car** CManager::getHead(string type)
 
 // Rent class methods
 
-void Rent::data(CManager* cm, Car* head, const string& type)
+void Rent::data(CManager* cm, Car* head, const string& type)//OOI XIEN XIEN
 {
     // Check if there are cars available for the specified type
     if (head == nullptr)
@@ -251,7 +252,7 @@ void Rent::data(CManager* cm, Car* head, const string& type)
 
 
 
-void Rent::calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee)
+void Rent::calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee)//OOI XIEN XIEN
 {
     this_thread::sleep_for(std::chrono::seconds(1));  // Pause execution for 1 second for simulation purposes
     cout << "Calculating rent. Please wait......" << endl;  // Inform the user about the ongoing calculation

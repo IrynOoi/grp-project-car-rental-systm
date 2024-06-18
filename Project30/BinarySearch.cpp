@@ -3,19 +3,22 @@
 #include "BinarySearch.h"
 
 // CarBinarySearch class methods
-int CarBinarySearch::countNodes(Car* head) {
+int CarBinarySearch::countNodes(Car* head)//OOI XIEN XIEN
+{
     int count = 0;  // Initialize count of nodes to 0
     Car* current = head;  // Start from the head of the linked list
 
     // Traverse the linked list and count nodes
-    while (current != nullptr) {
+    while (current != nullptr)
+    {
         count++;  // Increment count for each node
         current = current->getNext();  // Move to the next node
     }
     return count;  // Return the total number of nodes in the linked list
 }
 
-Car* CarBinarySearch::getNodeAt(Car* head, int index) {
+Car* CarBinarySearch::getNodeAt(Car* head, int index)//OOI XIEN XIEN
+{
     int count = 0;  // Initialize count of nodes to 0
     Car* current = head;  // Start from the head of the linked list
 
@@ -30,7 +33,8 @@ Car* CarBinarySearch::getNodeAt(Car* head, int index) {
     return nullptr;  // Return nullptr if index is out of bounds
 }
 
-Car* CarBinarySearch::binarySearchLinkedList(Car* head, string& targetCategory) {
+Car* CarBinarySearch::binarySearchLinkedList(Car* head, string& targetCategory) //OOI XIEN XIEN
+{
     int n = countNodes(head);  // Get the number of nodes in the linked list
     int low = 0;  // Initialize the low index of the search range
     int high = n - 1;  // Initialize the high index of the search range
