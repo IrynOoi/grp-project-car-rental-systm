@@ -41,7 +41,7 @@ void Welcome::readFromFile(const std::string& filename)
 void login() {
     string pass = "";
     char ch;
-    cout << "\n\n\n\n\n\n\n\n\STELLA CAR RENTAL \n\n";
+    cout << "\n\nSTELLA CAR RENTAL \n\n";
     cout << "\t------------------------------";
     cout << "\n\tLOGIN \n";
     cout << "\t------------------------------\n\n";

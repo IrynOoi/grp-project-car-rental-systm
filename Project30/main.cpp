@@ -63,7 +63,7 @@ int main()
     rent.data(&cm, cm.getHeadPtr("E1"), "E1");
     rent.data(&cm, cm.getHeadPtr("E2"), "E2");
 
-    void login();
+    void login(); //irdina
 
     do {
         cout << "\tPlease Enter your Name: "; // Customer name input loop
