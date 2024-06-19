@@ -41,34 +41,52 @@ void Welcome::readFromFile(const std::string& filename)
 void login() {
     string pass = "";
     char ch;
-    cout << "\n\nSTELLA CAR RENTAL \n\n";
+    cout << "\n\n\n\n\n\n\n\n\STELLA CAR RENTAL \n\n";
     cout << "\t------------------------------";
     cout << "\n\tLOGIN \n";
     cout << "\t------------------------------\n\n";
     cout << "\tEnter Password: ";
-    ch = _getch();
-    while (ch != 13) {
-        pass.push_back(ch);
-        cout << '*';
-        ch = _getch();
+
+    // Read characters until Enter (ASCII code 13) is pressed
+    while (true) {
+        ch = _getch();  // Read the next character of the password without echoing it
+
+        if (ch == 13) {  // Check if Enter key is pressed
+            break;  // Exit the loop if Enter is pressed
+        }
+        else if (ch == 8) {  // Check if Backspace key is pressed
+            if (!pass.empty()) {  // Check if password string is not empty
+                pass.pop_back();  // Remove the last character from password
+                cout << "\b \b";  // Move cursor back, print space to erase, move cursor back again
+            }
+        }
+        else {  // For regular characters
+            pass.push_back(ch);  // Append the character to the password string
+            cout << '*';  // Print an asterisk to mask the password character on the screen
+        }
     }
+
+    // Check if the entered password matches the expected password "admin"
     if (pass == "admin") {
         cout << "\n\n\n\tAccess Granted! \n";
-        system("PAUSE");
-        system("CLS");
+        system("PAUSE");  // Pause the program to allow user to read the message
+        system("CLS");  // Clear the screen for security after successful login
     }
     else {
-        cout << "\n\n\tAccess Aborted...\n\tPlease Try Again\n\n";
-        system("PAUSE");
-        system("CLS");
-        login();
+        cout << "\n\n\tAccess Denied...\n\tPlease Try Again\n\n";
+        system("PAUSE");  // Pause the program to allow user to read the message
+        system("CLS");  // Clear the screen for security after failed login
+        login();  // Recursively call login() function to allow user to retry login
     }
 }
 
-bool customer::isValidName(const string& name) 
+
+bool customer::isValidName(const string& name) //OOI XIEN XIEN
 {
-    for (char c : name) {
-        if (isdigit(c)) {
+    for (char c : name) 
+    {
+        if (isdigit(c)) 
+        {
             return false; // Invalid if any character is a digit
         }
     }
@@ -76,7 +94,7 @@ bool customer::isValidName(const string& name)
 }
 // Car class methods
 // Constructor for initializing a Car object with parameters
-Car::Car(Car* n, string c, string d, string p, bool a)
+Car::Car(Car* n, string c, string d, string p, bool a)//OOI XIEN XIEN
 {
     code = c;           // Initialize car code
     description = d;    // Initialize description
@@ -86,49 +104,49 @@ Car::Car(Car* n, string c, string d, string p, bool a)
 }
 
 // Default constructor for Car class
-Car::Car()
+Car::Car()//OOI XIEN XIEN
 {
     next = nullptr;     // Initialize next pointer to nullptr
 }
 
 // Getter for retrieving price of a car
-string Car::getPrice()
+string Car::getPrice()//OOI XIEN XIEN
 {
     return price;       // Return price of the car
 }
 
 // Getter for retrieving code of a car
-string Car::getCode()
+string Car::getCode()//OOI XIEN XIEN
 {
     return code;        // Return code of the car
 }
 
 // Getter for retrieving description of a car
-string Car::getDescription()
+string Car::getDescription()//OOI XIEN XIEN
 {
     return description; // Return description of the car
 }
 
 // Getter for checking availability of a car
-bool Car::isAvailable()
+bool Car::isAvailable()//OOI XIEN XIEN
 {
     return available;   // Return availability status of the car
 }
 
 // Getter for retrieving the next car in the list
-Car* Car::getNext()
+Car* Car::getNext()//OOI XIEN XIEN
 {
     return next;        // Return pointer to the next car in the list
 }
 
 // Setter for setting the next car in the list
-void Car::setNext(Car* n)
+void Car::setNext(Car* n)//OOI XIEN XIEN
 {
     next = n;           // Set next pointer to point to another car
 }
 
 // Method to add a new car to the end of the linked list
-void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
+void Car::addCar(Car** headPtr, string c, string d, string p, bool a)//OOI XIEN XIEN
 {
     Car* newCar = new Car(nullptr, c, d, p, a);  // Create a new car object
 
@@ -147,7 +165,7 @@ void Car::addCar(Car** headPtr, string c, string d, string p, bool a)
     }
 }
 
-void Car::displayCars(Car* head)
+void Car::displayCars(Car* head)//OOI XIEN XIEN
 {
     if (head == nullptr)
     {
@@ -158,38 +176,14 @@ void Car::displayCars(Car* head)
 
 
 // CManager class methods
-CManager::CManager()
+CManager::CManager()//OOI XIEN XIEN
 {
-    headM = nullptr;
-    headE1 = nullptr;
-    headE2 = nullptr;
+    headM = nullptr;  // Initialize head pointer for type "M" cars to null
+    headE1 = nullptr;  // Initialize head pointer for type "E1" cars to null
+    headE2 = nullptr;  // Initialize head pointer for type "E2" cars to null
 }
 
-Car** CManager::getHead(string type)
-{
-    CarSorting carSorting; // Create an instance of CarSorting
-
-    if (type == "M") {
-        // Sort the linked list of type "M" before returning the head pointer
-        carSorting.insertionSort(&headM);
-        return &headM;
-    }
-    if (type == "E1") {
-        // Sort the linked list of type "E1" before returning the head pointer
-        carSorting.insertionSort(&headE1);
-        return &headE1;
-    }
-    if (type == "E2") {
-        // Sort the linked list of type "E2" before returning the head pointer
-        carSorting.insertionSort(&headE2);
-        return &headE2;
-    }
-    return nullptr;
-}
-
-
-
-Car* CManager::getHeadPtr(string type)
+Car*CManager::getHeadPtr(string type)//OOI XIEN XIEN
 {
     if (type == "M") return headM;
     if (type == "E1") return headE1;
@@ -197,73 +191,104 @@ Car* CManager::getHeadPtr(string type)
     return nullptr;
 }
 
-// Rent class methods
 
-void Rent::data(CManager* cm, Car* head,const string& type)
+
+Car** CManager::getHead(string type)//OOI XIEN XIEN
 {
-    if (head == nullptr)
-    {
-        cout << "No cars available." << endl;
-        return;
-    }
-
-    menu<string> vehicleMenu;
-    cout << "\tPlease select a type of vehicle" << endl;
-    cout << "\tType of vehicles : " << endl;
+    CarSorting carSorting;  // Create an instance of CarSorting to sort the linked lists
 
     if (type == "M") {
-        vehicleMenu.displayVehicleOptions(cm, "M", "\t\033[4m1) Motorcycle Scooter (M)\033[0m");
+        carSorting.insertionSort(&headM);  // Sort the linked list of motorcycles
+        return &headM;  // Return a pointer to the head pointer of motorcycles
+    }
+    if (type == "E1") {
+        carSorting.insertionSort(&headE1);  // Sort the linked list of economy cars (1 day)
+        return &headE1;  // Return a pointer to the head pointer of economy cars (1 day)
+    }
+    if (type == "E2") {
+        carSorting.insertionSort(&headE2);  // Sort the linked list of economy cars (half day)
+        return &headE2;  // Return a pointer to the head pointer of economy cars (half day)
+    }
+    return nullptr;  // Return nullptr if the type is invalid
+}
+
+
+
+ 
+
+// Rent class methods
+
+void Rent::data(CManager* cm, Car* head, const string& type)//OOI XIEN XIEN
+{
+    // Check if there are cars available for the specified type
+    if (head == nullptr)
+    {
+        cout << "No cars available." << endl;  // Display message if no cars are found
+        return;  // Exit the function early if no cars are available
+    }
+
+    menu<string> vehicleMenu;  // Create a menu object for displaying vehicle options
+
+    cout << "\tPlease select a type of vehicle" << endl;  // Prompt user to select a vehicle type
+    cout << "\tType of vehicles : " << endl;  // Display header for vehicle types
+
+    // Display vehicle options based on the provided type
+    if (type == "M") {
+        vehicleMenu.displayVehicleOptions(cm, "M", "\t\033[4m1) Motorcycle Scooter (M)\033[0m");  // Display options for motorcycles
     }
     else if (type == "E1") {
-        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m2） Economy car (1 day) (E1) \033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "E1", "\t\033[4m2) Economy car (1 day) (E1) \033[0m");  // Display options for economy cars (1 day)
     }
     else if (type == "E2") {
-        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3） Economy car (halfday) (E2) \033[0m");
+        vehicleMenu.displayVehicleOptions(cm, "E2", "\t\033[4m3) Economy car (halfday) (E2) \033[0m");  // Display options for economy cars (half day)
     }
 }
 
 
-void Rent::calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee)
+
+
+
+void Rent::calculate(string input2, double& total, int day, int hour, int halfday, double& rentalfee)//OOI XIEN XIEN
 {
-    this_thread::sleep_for(std::chrono::seconds(1));
-    cout << "Calculating rent. Please wait......" << endl;
-    this_thread::sleep_for(std::chrono::seconds(2));
+    this_thread::sleep_for(std::chrono::seconds(1));  // Pause execution for 1 second for simulation purposes
+    cout << "Calculating rent. Please wait......" << endl;  // Inform the user about the ongoing calculation
+    this_thread::sleep_for(std::chrono::seconds(2));  // Pause execution for 2 seconds for simulation purposes
 
     // DAY CALCULATION
     if (input2 == "MA")
-        rentalfee = day * 65;
+        rentalfee = day * 65;  // Calculate rental fee for Motorcycle Scooter (M) for full day
     else if (input2 == "E1A")
-        rentalfee = day * 130;
+        rentalfee = day * 130;  // Calculate rental fee for Economy car (1 day) type A (E1A)
     else if (input2 == "E1B")
-        rentalfee = day * 250;
+        rentalfee = day * 250;  // Calculate rental fee for Economy car (1 day) type B (E1B)
+
     // HALF DAY CALCULATION
     else if (input2 == "MB")
-        rentalfee = halfday * 35;
+        rentalfee = halfday * 35;  // Calculate rental fee for Motorcycle Scooter (M) for half day
     else if (input2 == "E2A")
-        rentalfee = halfday * 90;
+        rentalfee = halfday * 90;  // Calculate rental fee for Economy car (half day) type A (E2A)
     else if (input2 == "E2B")
-        rentalfee = halfday * 190;
+        rentalfee = halfday * 190;  // Calculate rental fee for Economy car (half day) type B (E2B)
+
     // HOUR CALCULATION
     else if (input2 == "MC")
-        rentalfee = hour * 5;
-    else {}
+        rentalfee = hour * 5;  // Calculate rental fee for Motorcycle Scooter (M) per hour
 
-    total += rentalfee;
-    cout << "Your rental fee is RM " << fixed << setprecision(2) << total << endl;
+    total += rentalfee;  // Update total rental fee with the calculated rental fee
+    cout << "Your rental fee is RM " << fixed << setprecision(2) << total << endl;  // Display the total rental fee to the user
 }
+
 
 
 //receipt copy function
 void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total)
 {
     // Open the output file in append mode
-    ofstream outputfile("Invoice.txt", ios::out);
+    ofstream outputfile("Invoice.txt", ios::out | ios::app);
     if (!outputfile.is_open()) {
         cerr << "Error: Unable to open file Invoice.txt for writing." << endl;
         return;
     }
-
-
 
     // Write header and customer information
     outputfile << "\n                       Car Rental - Customer Invoice                  " << endl;
@@ -287,9 +312,9 @@ void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManag
         outputfile << " Vehicle Type : " << "--------------------" << setw(10) << cartypename << endl;
         Car* car = cm->getHeadPtr(rental.cartype);
         if (car != nullptr) {
-            outputfile << "  | Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
+            outputfile << "   Car Model :" << "--------------------" << setw(10) << car->getCode() << endl;
             if (rental.cartype == "E1" || rental.cartype == "E2") {
-                outputfile << "  | Car Detail. :" << "----------------------" << setw(10) << car->getDescription() << " |" << endl;
+                outputfile << "   Car Detail. :" << "----------------------" << setw(10) << car->getDescription()  << endl;
             }
         }
         else {
@@ -327,5 +352,3 @@ void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManag
     outputfile.close(); // Close the output file
     cout << "Invoice generated successfully." << endl;
 }
-
-

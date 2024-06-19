@@ -6,7 +6,6 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib> // For exit()
-#include <conio.h>
 #include "Sentinel.h"
 using namespace std;
 
@@ -19,7 +18,7 @@ int main()
     // Display the welcome message
     welcome.displayWelcomeMessage();
 
-    cout << "\nWelcome to the Stella Car Rental!" << std::endl;
+    cout << "\nWelcome to the Stellar Car Rental!" << std::endl;
     cout << "We are delighted to serve you." << std::endl;
 
     int day=0, halfday=0,hour=0;
@@ -35,17 +34,16 @@ int main()
     SentinelSearch SS;
     int order=0;
     customer customer;
-
     login();
  
     vector<RentalInfo> rentals; // Vector to store all rental information
 
     // Add cars to the respective lists
-    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",true); //(MA)Motorcycle Scooter - 1 day
+    car.addCar(cm.getHead("M"), "MA", "1 day", "RM65",false); //(MA)Motorcycle Scooter - 1 day
     car.addCar(cm.getHead("M"), "MB", "Halfday", "RM35", true);//(MB)Motorcycle Scooter - halfday
     car.addCar(cm.getHead("M"), "MC", "1 hour", "RM5.00", true);//(MC)Motorcycle Scooter-1 hour
     //1 day
-    car.addCar(cm.getHead("E1"), "E1B", "6 Seater Car", "RM250.00", false); //(E1B) 6 Seater Car
+    car.addCar(cm.getHead("E1"), "E1B", "6 Seater Car", "RM250.00", true); //(E1B) 6 Seater Car
     car.addCar(cm.getHead("E1"), "E1A", "4 Seater Car", "RM130.00", true); //(E1A) Axia / Kelisa Auto
     //halfday
     car.addCar(cm.getHead("E2"), "E2A", "4 Seater Car", "RM90.00", true);//(E2A) Axia / Kelisa Auto
@@ -63,7 +61,7 @@ int main()
     rent.data(&cm, cm.getHeadPtr("E1"), "E1");
     rent.data(&cm, cm.getHeadPtr("E2"), "E2");
 
-    void login(); //irdina
+    void login();
 
     do {
         cout << "\tPlease Enter your Name: "; // Customer name input loop
@@ -77,61 +75,59 @@ int main()
             break; // Valid name entered, exit loop
         }
     } while (true);
-
-
-    do 
+    do
     {
         RentalInfo rental; // Create a new RentalInfo object for each rental
-        
+
         // Car type selection loop
-       
+
+        do
+        {
+            cout << "\nEnter the car type you want to search (M, E1, E2): ";
+            cin >> cartype;
+            // Convert cartype to uppercase
+            for (char& c : cartype)
+            {
+                c = toupper(c);
+            }
+            // Search and select car model loop
+            SS.sentinelSearch(cartype, &cm);
+
             do
             {
-                cout << "\nEnter the car type you want to search (M, E1, E2): ";
-                cin >> cartype;
-                // Convert cartype to uppercase
-                for (char& c : cartype)
+                cout << "\nEnter the car model you want to search (MA, MB, MC, etc): ";
+                cin >> input2;
+
+                // Convert input2 to uppercase
+                for (char& c : input2)
                 {
-                    c = toupper(c);
+                    c = toupper(c); // Convert each character to uppercase
                 }
-                // Search and select car model loop
-                SS.sentinelSearch(cartype, &cm);
 
-                do
-                {
-                    cout << "\nEnter the car model you want to search (MA, MB, MC, etc): ";
-                    cin >> input2;
+            } while (input2 != "MA" && input2 != "MB" && input2 != "MC" &&
+                input2 != "E1A" && input2 != "E1B" &&
+                input2 != "E2A" && input2 != "E2B");
 
-                    // Convert input2 to uppercase
-                    for (char& c : input2)
-                    {
-                        c =toupper(c); // Convert each character to uppercase
-                    }
+            // Perform binary search for the car model
+            Car* result2 = BS.binarySearchLinkedList(cm.getHeadPtr(cartype), input2);
 
-                } while (input2 != "MA" && input2 != "MB" && input2 != "MC" &&
-                    input2 != "E1A" && input2 != "E1B" &&
-                    input2 != "E2A" && input2 != "E2B");
+            // Check if result2 is nullptr (not found) or if the found car does not match the selected category
+            if (!result2->isAvailable())
+            {
+                cout << "However,Car model " << input2 << " is not available for now." << endl;
 
-                // Perform binary search for the car model
-                Car* result2 = BS.binarySearchLinkedList(cm.getHeadPtr(cartype), input2);
+                cout << "Do you want to choose another car to your cart? (Y/N): ";
+                cin >> input3;
+                cout << endl;
+                if (input3 != 'Y' && input3 != 'y') {
+                    exit(0); // Exit the loop if the user does not want to choose another car
+                }
 
-                // Check if result2 is nullptr (not found) or if the found car does not match the selected category
-                    if (!result2->isAvailable())
-                    {
-                        cout << "However,Car model " << input2 << " is not available for now." << endl;
+            }
+            else
+                break;
 
-                        cout << "Do you want to choose another car to your cart? (Y/N): ";
-                        cin >> input3;
-                        cout << endl;
-                        if (input3 != 'Y' && input3 != 'y') {
-                            exit(0); // Exit the loop if the user does not want to add more cars
-                        }
-                        
-                    }
-                    else 
-                        break;
-                
-            } while (input3=='Y'|| input3 == 'y');
+        } while (input3 == 'Y' || input3 == 'y');
 
         // Additional logic for selecting car details (Axia/Kelisa)
         if (cartype == "E1" || cartype == "E2")
@@ -161,7 +157,7 @@ int main()
         // Ask for rental period based on car model type
         if (input2 == "MA" || input2 == "E1A" || input2 == "E1B") {
             cout << "Please key in the number of days you want to rent: ";
-            while (!(cin >> day) || day <= 0) 
+            while (!(cin >> day) || day <= 0)
             {
                 cout << "Invalid input. Please enter a positive number for days: ";
                 cin.clear(); // Clear the error flag
