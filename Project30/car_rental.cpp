@@ -23,7 +23,7 @@ void Welcome::displayWelcomeMessage()
 {
     readFromFile("welcome.txt");
 }
-void Welcome::readFromFile(const std::string& filename) 
+void Welcome::readFromFile(const string& filename) 
 {
     std::ifstream file(filename);
     if (file.is_open()) {
