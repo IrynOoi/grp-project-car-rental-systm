@@ -42,7 +42,7 @@ void login() //IRDINA SYAFIAH BINTI NORAZMAN
 {
     string pass = "";
     char ch;
-    cout << "\n\n\STELLA CAR RENTAL \n\n";
+    cout << "\n\n\STELLAR CAR RENTAL \n\n";
     cout << "\t------------------------------";
     cout << "\n\tLOGIN \n";
     cout << "\t------------------------------\n\n";
