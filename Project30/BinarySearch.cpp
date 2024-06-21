@@ -69,6 +69,6 @@ Car* CarBinarySearch::binarySearchLinkedList(Car* head, string& targetCategory) 
         }
     }
 
-    cout << "Car model " << targetCategory << " is not found." << endl;
+    
     return nullptr;  // Return nullptr if target category is not found
 }
