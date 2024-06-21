@@ -3,7 +3,7 @@
 #include "Sentinel.h"
 #include "InsertionSort.h"
 #include <iostream>
-#include <thread>
+#include <thread>//time delay
 #include <iomanip> 
 #include <fstream>
 #include <conio.h>

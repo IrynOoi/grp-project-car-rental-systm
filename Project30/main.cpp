@@ -64,7 +64,7 @@ int main()
     void login();
 
     do {
-        cout << "\tPlease Enter your Name: "; // Customer name input loop
+        cout << "\tPlease Enter your Name: ";
         getline(cin, customername);
 
         // Check if the name contains any numbers
@@ -75,63 +75,49 @@ int main()
             break; // Valid name entered, exit loop
         }
     } while (true);
-    do
-    {
+
+
+    do {
         RentalInfo rental; // Create a new RentalInfo object for each rental
+        order++; // Increment order for each rental
+
+        // Customer name input loop
 
         // Car type selection loop
-
-        do
-        {
+        do {
             cout << "\nEnter the car type you want to search (M, E1, E2): ";
             cin >> cartype;
             // Convert cartype to uppercase
-            for (char& c : cartype)
-            {
+            for (char& c : cartype) {
                 c = toupper(c);
             }
-            // Search and select car model loop
-            SS.sentinelSearch(cartype, &cm);
+        } while (cartype != "M" && cartype != "E1" && cartype != "E2");
 
-            do
-            {
-                cout << "\nEnter the car model you want to search (MA, MB, MC, etc): ";
-                cin >> input2;
+        // Search and select car model loop
+        SS.sentinelSearch(cartype, &cm);
+        do {
+            cout << "\nEnter the car model you want to search (MA, MB, MC, etc): ";
+            cin >> input2;
 
-                // Convert input2 to uppercase
-                for (char& c : input2)
-                {
-                    c = toupper(c); // Convert each character to uppercase
-                }
-
-            } while (input2 != "MA" && input2 != "MB" && input2 != "MC" &&
-                input2 != "E1A" && input2 != "E1B" &&
-                input2 != "E2A" && input2 != "E2B");
+            // Convert input2 to uppercase
+            for (char& c : input2) {
+                c = toupper(c); // Convert each character to uppercase
+            }
 
             // Perform binary search for the car model
             Car* result2 = BS.binarySearchLinkedList(cm.getHeadPtr(cartype), input2);
 
             // Check if result2 is nullptr (not found) or if the found car does not match the selected category
-            if (!result2->isAvailable())
-            {
-                cout << "However,Car model " << input2 << " is not available for now." << endl;
-
-                cout << "Do you want to choose another car to your cart? (Y/N): ";
-                cin >> input3;
-                cout << endl;
-                if (input3 != 'Y' && input3 != 'y') {
-                    exit(0); // Exit the loop if the user does not want to choose another car
-                }
-
+            if (result2 == nullptr || result2->getCode() != input2) {
+                cout << "Car model " << input2 << " not found for category " << cartype << "." << endl;
             }
-            else
-                break;
-
-        } while (input3 == 'Y' || input3 == 'y');
+            else {
+                break; // Car model found, exit loop
+            }
+        } while (true);
 
         // Additional logic for selecting car details (Axia/Kelisa)
-        if (cartype == "E1" || cartype == "E2")
-        {
+        if (rental.cartype == "E1" || rental.cartype == "E2") {
             do {
                 cout << "Choose Axia (A) or Kelisa (K)? " << endl;
                 cin >> carmodel;
@@ -172,8 +158,7 @@ int main()
                 cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore the rest of the input
             }
         }
-        else if (input2 == "MC")
-        {
+        else if (input2 == "MC") {
             cout << "Please key in the number of hours you want to rent: ";
             while (!(cin >> hour) || hour <= 0) {
                 cout << "Invalid input. Please enter a positive number for hours: ";
@@ -204,8 +189,12 @@ int main()
 
         // Clear cin buffer
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        // Generate invoice for all rentals made
+
+
 
     } while (input3 == 'Y' || input3 == 'y');
+
   
     // Generate receiptcopy for all rentals made
     

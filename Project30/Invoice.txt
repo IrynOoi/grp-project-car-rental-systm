@@ -24,3 +24,48 @@
   You are advised to pay up the amount before due date.
   Otherwise penalty fee will be applied
  ***********************************************************************
+
+                       Car Rental - Customer Invoice                  
+  ***********************************************************************
+   Invoice No. :------------------ #CNB12345
+   Customer Name:-----------------        io
+ Vehicle Type : --------------------Economy Car
+   Car Model :--------------------       E1A
+   Car Detail. :----------------------4 Seater Car
+   Number of days :---------------        45
+   Your Rental Amount is :--------      5850 
+   Caution Money :----------------         0 
+   Advanced :---------------------         0 
+   ________________________________________________________
+
+   Total Rental Amount is :-------      5850 
+   ________________________________________________________
+   # This is a computer generated invoice and it does not
+   require an authorised signature #
+ 
+ ***********************************************************************
+  You are advised to pay up the amount before due date.
+  Otherwise penalty fee will be applied
+ ***********************************************************************
+
+                       Car Rental - Customer Invoice                  
+  ***********************************************************************
+   Invoice No. :------------------ #CNB12345
+   Customer Name:-----------------       iii
+ Vehicle Type : --------------------Motorcycle Scooter
+   Car Model :--------------------        MA
+   Number of days :---------------        23
+   Your Rental Amount is :--------      1495 
+   Caution Money :----------------         0 
+   Advanced :---------------------         0 
+   ________________________________________________________
+
+   Total Rental Amount is :-------      1495 
+   ________________________________________________________
+   # This is a computer generated invoice and it does not
+   require an authorised signature #
+ 
+ ***********************************************************************
+  You are advised to pay up the amount before due date.
+  Otherwise penalty fee will be applied
+ ***********************************************************************
