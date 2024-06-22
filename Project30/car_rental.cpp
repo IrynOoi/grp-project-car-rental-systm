@@ -23,6 +23,7 @@ void Welcome::displayWelcomeMessage()
 {
     readFromFile("welcome.txt");
 }
+// Welcome class implementation PRIYADASHWINI
 void Welcome::readFromFile(const string& filename) 
 {
     std::ifstream file(filename);
@@ -281,7 +282,7 @@ void Rent::calculate(string input2, double& total, int day, int hour, int halfda
 
 
 
-//receipt copy function
+//receipt copy function(INAS)
 void Rent::receiptcopy(vector<RentalInfo>& rentals, string& customername, CManager* cm, double total)
 {
     // Open the output file in append mode
