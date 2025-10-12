@@ -22,7 +22,6 @@ Key features of the Car Rental System include user-friendly interfaces for custo
 
 
 
-<img width="975" height="523" alt="image" src="https://github.com/user-attachments/assets/687c90bb-79a8-4849-9374-58b4fd4c4445" />
 
 
 
