@@ -4,8 +4,6 @@ Key features of the Car Rental System include user-friendly interfaces for custo
 
 
 
-# 🚗 Stellar Car Rental System
-
 ## 📌 Overview
 The **Stellar Car Rental System** is a C++ console-based application designed to manage vehicle rentals efficiently. It supports motorcycles and economy cars with different rental durations, allowing users to browse, search, and rent vehicles while generating invoices.
 
